@@ -1,0 +1,6 @@
+com/yaegel/tech/webapp/config/WebApplicationContextConfig.class
+com/yaegel/tech/webapp/controller/ContactController.class
+com/yaegel/tech/webapp/config/DispatcherServletInitializer.class
+com/yaegel/tech/webapp/controller/HomeController.class
+com/yaegel/tech/webapp/controller/ProjectsController.class
+com/yaegel/tech/webapp/controller/AboutController.class
