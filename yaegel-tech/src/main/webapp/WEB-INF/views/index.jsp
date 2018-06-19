@@ -12,6 +12,7 @@
           
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
        
           
          
@@ -26,23 +27,23 @@
                   
           </div>
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-  <a class="navbar-brand" href="/yaegel-tech">Luke Yaegel Technologies</a>
+  <a class="navbar-brand" href="${pageContext.request.contextPath}/">Luke Yaegel Technologies</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="/yaegel-tech">Home</a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/yaegel-tech/about">About Me</a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/about">About Me</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/yaegel-tech/projects">Projects</a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/projects">Projects</a>
       </li>   
       <li class="nav-item">
-        <a class="nav-link" href="/yaegel-tech/contact">Contact Me</a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/contact">Contact Me</a>
       </li>
     </ul>
   </div>  
@@ -51,11 +52,11 @@
   <div class="row">
     <div class="col-sm-4">
       <h2>Intro</h2>
-      <h5>Photo of me:</h5>
-      <div><img src="/yaegel-tech/img/luke_yaegel.png" alt="lukes pic" height="150" width="150">
-      <img src="/yaegel-tech/img/luke_yaegel_2.jpg" alt="lukes pic" height="150" width="185"></div>
-      <div><img src="/yaegel-tech/img/luke_yaegel_3.png" alt="lukes pic" height="150" width="185">
-      <img src="/yaegel-tech/img/luke_yaegel_4.png" alt="lukes pic" height="150" width="150"></div>
+      <h5>Photos of me:</h5>
+      <div><img src="${pageContext.request.contextPath}/resources/images/luke_yaegel.png" alt="lukes pic" height="150" width="150">
+      <img src="${pageContext.request.contextPath}/resources/images/luke_yaegel_2.jpg" alt="lukes pic" height="150" width="185"></div>
+      <div><img src="${pageContext.request.contextPath}/resources/images/luke_yaegel_3.png" alt="lukes pic" height="150" width="185">
+      <img src="${pageContext.request.contextPath}/resources/images/luke_yaegel_4.png" alt="lukes pic" height="150" width="150"></div>
       <p>Hello World! I'm a software engineer by day and a developer by night. 
       I'm passionate about what I do and enjoy building new projects with this being my latest using Spring MVC 4, Maven, and more to come! </p>
       
@@ -63,7 +64,7 @@
     <div class="col-sm-8">
       <h2>Where it all starts!</h2>
       <h5>The beginning of projects to come. - June 18, 2018</h5>
-      <div><img src="/yaegel-tech/img/codes-coding-computer-247791.jpg" alt="codes coding computer" height=200 width=400></div>
+      <div><img src="${pageContext.request.contextPath}/resources/images/codes-coding-computer-247791.jpg" alt="codes coding computer" height=200 width=400></div>
       <p>Upcoming additions will include MySQL querying, Hibernate, Other Spring Components (batch, cloud, etc.) and eventually Spring Boot, NoSQL, Docker, Jenkins and more.</p>
       <br>
     </div>

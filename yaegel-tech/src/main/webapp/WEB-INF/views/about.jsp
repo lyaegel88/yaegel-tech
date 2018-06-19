@@ -32,16 +32,16 @@
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="/yaegel-tech">Home</a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/yaegel-tech/about">About Me</a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/about">About Me</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/yaegel-tech/projects">Projects</a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/projects">Projects</a>
       </li>   
       <li class="nav-item">
-        <a class="nav-link" href="/yaegel-tech/contact">Contact Me</a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/contact">Contact Me</a>
       </li>
     </ul>
   </div>  
@@ -51,7 +51,7 @@
     <div class="col-sm-8">
       <h2>About yours truly</h2>
       <h5>Who is Luke Yaegel? - June 18, 2018</h5>
-      <div><img src="/yaegel-tech/img/adult-apple-device-business-340152.jpg" alt="adult apple device business" height=200 width=400></div>
+      <div><img src="${pageContext.request.contextPath}/resources/images/adult-apple-device-business-340152.jpg" alt="adult apple device business" height=200 width=400></div>
       <p>Born and raised in Kentucky just over the river from Cincinnati. I am married to a wonderful woman and we take care of our 3 dogs together. My hobbies include finding new restaurants to eat, 
       going to events and concerts, and spending time with my family.</p>
       <p>Also, working with computers and software have been a hobby of mine since I was young. I enjoyed it enough to get a Bachelor's degree in Information Technology with a focus on Software Application
@@ -73,7 +73,7 @@
       <li>Linux/Unix Administration</li>
       <li>Much more...</li>
       </ul>
-      </div
+      </div>
       <br>
     </div>
   </div>
