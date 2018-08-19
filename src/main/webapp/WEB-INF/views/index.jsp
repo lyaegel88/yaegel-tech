@@ -17,34 +17,17 @@
           
          
 		<title>Home - Yaegel Tech</title>
-              
- <style>
- .jumbotron {
-    margin-bottom: 0px;
-    background-image: url(/resources/images/black-and-white-businessman-company-140945.jpg);
-    background-position: 0% 25%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    color: white;
-    text-shadow: black 0.3em 0.3em 0.3em;
-    min-height: 275px;
-} 
-</style>
      </head>
      
-     <body class="body">
-     <div class="jumbotron">
-                 
-                
-                  
-          </div>
+     <body class="body" style="background-image: url(${pageContext.request.contextPath}/resources/images/pexels-photo-1118866.jpeg); background-size: cover; background-repeat: no-repeat;">
+    
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-  <a class="navbar-brand" href="${pageContext.request.contextPath}/">Luke Yaegel Technologies</a>
+  <a class="navbar-brand" href="${pageContext.request.contextPath}/">Luke Yaegel</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
-    <ul class="navbar-nav">
+    <ul class="navbar-nav ml-auto">
       <li class="nav-item">
         <a class="nav-link" href="${pageContext.request.contextPath}/">Home</a>
       </li>
@@ -60,25 +43,23 @@
     </ul>
   </div>  
 </nav>
-          <div class="container" style="margin-top:30px">
+          <div class="container" style="margin-top:30px; ">
   <div class="row">
     <div class="col-sm-4">
-      <h2>Intro</h2>
-      <h5>Photos of me:</h5>
-      <div><img src="${pageContext.request.contextPath}/resources/images/luke_yaegel.png" alt="lukes pic" height="150" width="150">
-      <img src="${pageContext.request.contextPath}/resources/images/luke_yaegel_2.jpg" alt="lukes pic" height="150" width="185"></div>
-      <div><img src="${pageContext.request.contextPath}/resources/images/luke_yaegel_3.png" alt="lukes pic" height="150" width="185">
-      <img src="${pageContext.request.contextPath}/resources/images/luke_yaegel_4.png" alt="lukes pic" height="150" width="150"></div>
-      <p>Hello World! I'm a software engineer by day and a developer by night. 
-      I'm passionate about what I do and enjoy building new projects with this being my latest using Spring MVC 4, Maven, and more to come! </p>
+  		 
+   			 <h2 class="card-title"></h2>
+    	
       
     </div>
     <div class="col-sm-8">
-      <h2>Where it all starts!</h2>
-      <h5>The beginning of projects to come. - June 18, 2018</h5>
-      <div><img src="${pageContext.request.contextPath}/resources/images/codes-coding-computer-247791.jpg" alt="codes coding computer" height=200 width=400></div>
-      <p>Upcoming additions will include MySQL querying, Hibernate, Other Spring Components (batch, cloud, etc.) and eventually Spring Boot, NoSQL, Docker, Jenkins and more.</p>
-      <br>
+    <div class="card" style="width:22rem;margin:20px 0 24px 0;border: 2px solid black; background:rgba(255,255,255,0.5);">
+      <div><img src="${pageContext.request.contextPath}/resources/images/luke_yaegel.png" alt="lukes pic" height="150" width="150" style="margin-left: 5px; margin-bottom: 3px; border: 2px solid black; margin-top: 3px;">
+      <img src="${pageContext.request.contextPath}/resources/images/luke_yaegel_2.jpg" alt="lukes pic" height="150" width="185" style="margin-bottom: 3px; border: 2px solid black; margin-top: 3px;"></div>
+      <div><img src="${pageContext.request.contextPath}/resources/images/luke_yaegel_3.png" alt="lukes pic" height="150" width="185" style="margin-left: 5px; border: 2px solid black">
+      <img src="${pageContext.request.contextPath}/resources/images/luke_yaegel_4.png" alt="lukes pic" height="150" width="150" style="border: 2px solid black"></div>
+      <p class="card-body"><b>Hello World! I'm a software engineer by day and a developer by night. 
+      I'm passionate about what I do and enjoy building new projects with this being my latest using Spring MVC 4, Maven, and more to come! </b></p>
+      </div>
     </div>
   </div>
 </div>
