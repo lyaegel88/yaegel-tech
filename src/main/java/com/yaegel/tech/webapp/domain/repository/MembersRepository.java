@@ -8,5 +8,9 @@ public interface MembersRepository {
 	List <Members> getAllMembers();
 	
 	Members getMemberById(String memberID);
+	
+	void addMember(Members member);
+	
+	void deleteMember(String memberID);
 
 }

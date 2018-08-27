@@ -22,8 +22,19 @@ public class MembersServiceImpl implements MembersService{
 
 	@Override
 	public Members getMemberById(String memberID) {
-		// TODO Auto-generated method stub
 		return membersRepository.getMemberById(memberID);
+	}
+
+	@Override
+	public void addMember(Members member) {
+		membersRepository.addMember(member);
+		
+	}
+
+	@Override
+	public void deleteMember(String memberID) {
+		membersRepository.deleteMember(memberID);
+		
 	}
 	
 	

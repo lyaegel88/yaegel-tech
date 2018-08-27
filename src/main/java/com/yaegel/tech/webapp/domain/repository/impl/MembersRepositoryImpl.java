@@ -34,6 +34,41 @@ public class MembersRepositoryImpl implements MembersRepository{
 		return jdbcTemplate.queryForObject(SQL, params, new MembersMapper());
 	}
 	
+	@Override
+	public void deleteMember(String memberID) {
+		String SQL = "DELETE FROM customer WHERE CustomerID = :id";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id", memberID);
+		
+		jdbcTemplate.update(SQL, params);
+	}
+	
+	@Override
+	public void addMember(Members member) {
+		String SQL = "INSERT INTO customer (CustomerID, "
+				+ "CustomerFN,"
+				+ "CustomerLN,"
+				+ "CustomerAddress1,"
+				+ "CustomerAddress2,"
+				+ "CustomerCity,"
+				+ "CustomerState,"
+				+ "CustomerZip,"
+				+ "CustomerPhone)"
+				+ "VALUES (:id, :firstName, :lastName, :address1, :address2, :city, :state, :zip, :phone)";
+		Map<String, Object> params = new HashMap<>();
+		params.put("id", member.getCustomerId());
+		params.put("firstName", member.getCustomerFn());
+		params.put("lastName", member.getCustomerLn());
+		params.put("address1", member.getCustomerAddress1());
+		params.put("address2", member.getCustomerAddress2());
+		params.put("city", member.getCustomerCity());
+		params.put("state", member.getCustomerState());
+		params.put("zip", member.getCustomerZip());
+		params.put("phone", member.getCustomerPhone());
+		
+		jdbcTemplate.update(SQL, params);
+		
+	}
 	
 	private static final class MembersMapper implements RowMapper<Members> {
 		public Members mapRow(ResultSet rs, int rowNum)
@@ -54,6 +89,7 @@ public class MembersRepositoryImpl implements MembersRepository{
 
 	}
 
+	
 	
 	
 }

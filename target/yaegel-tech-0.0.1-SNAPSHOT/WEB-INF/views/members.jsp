@@ -56,6 +56,17 @@
 
 <section class="container">
 	<div class="row">
+	<div class="col-sm-6 col-md-3" style="margin-top:10px">
+				<div class="card">
+					
+						<h3 class="card-header">Manage Members</h3>
+						<div class="card-body">
+						<p><a href="${pageContext.request.contextPath}/members/add"><button type="button" class="btn btn-primary">Add a member</button></a><p>
+						<p><a href="${pageContext.request.contextPath}/members/manage"><button type="button" class="btn btn-primary">Delete a member</button></a></p>	
+						</div>
+					
+				</div>
+			</div>
 		<c:forEach items="${members}" var="members">
 			<div class="col-sm-6 col-md-3" style="margin-top:10px">
 				<div class="card">
@@ -65,7 +76,7 @@
 						<p>Member ID: ${members.customerId}</p>
 						<p>Address: ${members.customerAddress1}</p>
 						<p>${members.customerCity}, ${members.customerState} ${members.customerZip}</p>
-						<p><a href=" <spring:url value="/member?id=${members.customerId}" />"><button type="button" class="btn btn-primary">Details</button></a></p>
+						<p><a href=" <spring:url value="/member?id=${members.customerId}" />"><button type="button" class="btn btn-info">Details</button></a></p>
 						</div>
 				</div>
 			</div>
