@@ -40,6 +40,9 @@
       <li class="nav-item">
         <a class="nav-link" href="${pageContext.request.contextPath}/contact">Contact Me</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="${pageContext.request.contextPath}/members">Members</a>
+      </li>
     </ul>
   </div>  
 </nav>
@@ -51,12 +54,9 @@
     	
       
     </div>
-    <div class="col-sm-8">
-    <div class="card" style="width:22rem;margin:20px 0 24px 0;border: 2px solid black; background:rgba(255,255,255,0.5);">
-      <div><img src="${pageContext.request.contextPath}/resources/images/luke_yaegel.png" alt="lukes pic" height="150" width="150" style="margin-left: 5px; margin-bottom: 3px; border: 2px solid black; margin-top: 3px;">
-      <img src="${pageContext.request.contextPath}/resources/images/luke_yaegel_2.jpg" alt="lukes pic" height="150" width="185" style="margin-bottom: 3px; border: 2px solid black; margin-top: 3px;"></div>
-      <div><img src="${pageContext.request.contextPath}/resources/images/luke_yaegel_3.png" alt="lukes pic" height="150" width="185" style="margin-left: 5px; border: 2px solid black">
-      <img src="${pageContext.request.contextPath}/resources/images/luke_yaegel_4.png" alt="lukes pic" height="150" width="150" style="border: 2px solid black"></div>
+    <div class="col-sm-4">
+    <div class="card" style="width:100%;margin:20px 0 24px 0;border: 2px solid black; background:rgba(255,255,255,0.5);">
+      <div style="margin: auto;"><img src="${pageContext.request.contextPath}/resources/images/lukes_cover_photo.png" alt="lukes pic" style="height: 305; width: 340; padding: 3px;"></div>
       <p class="card-body"><b>Hello World! I'm a software engineer by day and a developer by night. 
       I'm passionate about what I do and enjoy building new projects with this being my latest using Spring MVC 4, Maven, and more to come! </b></p>
       </div>

@@ -39,6 +39,9 @@
       <li class="nav-item">
         <a class="nav-link" href="${pageContext.request.contextPath}/contact">Contact Me</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="${pageContext.request.contextPath}/members">Members</a>
+      </li>
     </ul>
   </div>  
 </nav>

@@ -6,5 +6,7 @@ import com.yaegel.tech.webapp.domain.Members;
 public interface MembersRepository {
 	
 	List <Members> getAllMembers();
+	
+	Members getMemberById(String memberID);
 
 }

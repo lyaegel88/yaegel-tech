@@ -26,6 +26,15 @@ public class MembersRepositoryImpl implements MembersRepository{
 		return result;
 	}
 	
+	@Override
+	public Members getMemberById(String memberID) {
+		String SQL = "SELECT * FROM customer WHERE CustomerID = :id";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id", memberID);
+		return jdbcTemplate.queryForObject(SQL, params, new MembersMapper());
+	}
+	
+	
 	private static final class MembersMapper implements RowMapper<Members> {
 		public Members mapRow(ResultSet rs, int rowNum)
 		throws SQLException {
@@ -44,6 +53,7 @@ public class MembersRepositoryImpl implements MembersRepository{
 		}
 
 	}
+
 	
 	
 }

@@ -10,5 +10,7 @@ com/yaegel/tech/webapp/controller/AboutController.class
 com/yaegel/tech/webapp/controller/ContactController.class
 com/yaegel/tech/webapp/domain/Members.class
 com/yaegel/tech/webapp/controller/ProjectsController.class
+com/yaegel/tech/webapp/service/MembersService.class
 com/yaegel/tech/webapp/domain/repository/impl/MembersRepositoryImpl.class
+com/yaegel/tech/webapp/service/impl/MembersServiceImpl.class
 com/yaegel/tech/webapp/domain/repository/impl/MembersRepositoryImpl$1.class
