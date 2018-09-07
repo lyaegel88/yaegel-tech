@@ -1,6 +1,7 @@
 package com.yaegel.tech.webapp.domain;
 
 import java.io.Serializable;
+import org.springframework.web.multipart.MultipartFile;
 
 public class Members implements Serializable {
 	
@@ -15,6 +16,9 @@ public class Members implements Serializable {
 	private String customerState;
 	private String customerZip;
 	private String customerPhone;
+	private String customerImageUrl;
+	
+	private MultipartFile customerImage;
 	
 	public Members() {
 		super();
@@ -98,6 +102,22 @@ public class Members implements Serializable {
 	public void setCustomerPhone(String customerPhone) {
 		this.customerPhone = customerPhone;
 	}
+	
+	public String getCustomerImageUrl() {
+		return customerImageUrl;
+	}
+
+	public void setCustomerImageUrl(String customerImageUrl) {
+		this.customerImageUrl = customerImageUrl;
+	}
+	
+	public MultipartFile getCustomerImage() {
+		return customerImage;
+	}
+
+	public void setCustomerImage(MultipartFile customerImage) {
+		this.customerImage = customerImage;
+	}
 
 	@Override
 	public boolean equals(Object obj) {
@@ -125,4 +145,6 @@ public class Members implements Serializable {
 					customerId.hashCode());
 		return result;
 	}
+
+
 }

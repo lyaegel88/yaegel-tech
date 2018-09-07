@@ -43,7 +43,7 @@
         <a class="nav-link" href="${pageContext.request.contextPath}/contact">Contact Me</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="${pageContext.request.contextPath}/members">Members</a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/members?page=1">Members</a>
       </li>
     </ul>
   </div>  
@@ -57,7 +57,9 @@
 </section>
 
 <section class="container">
-	<form:form method="POST" modelAttribute="newMember" class="form-horizontal">
+	<p>${success}</p>
+	<p><a href="${pageContext.request.contextPath}/members?page=1"><button type="button" class="btn btn-dark">Back to members</button></a></p>
+	<form:form method="POST" modelAttribute="newMember" class="form-horizontal" enctype="multipart/form-data">
 		<fieldset>
 				<div class="form-group">
 					<label for="customerId">Member Id</label>
@@ -111,11 +113,17 @@
 						<form:input id="customerPhone" path="customerPhone" type="text" class="form-control"/>
 					
 				</div>
+				
+				<div class="form-group">
+					<label class="control-label col-lg-2" for="customerImage">Image Upload</label>
+					<div class="col-lg-10">
+					<form:input id="customerImage" path="customerImage" type="file" class="form:input-large" />
+					</div>
+				</div>
 
 			<div class="form-group">
 				<div class="col-lg-offset-2 col-lg-10">
 				<input type="submit" id="btnAdd" class="btn btn-primary" value ="Add"/>
-				<a href="${pageContext.request.contextPath}/members"><button type="button" class="btn btn-dark">Back to members</button>
 				</div>
 			</div>
 		</fieldset>

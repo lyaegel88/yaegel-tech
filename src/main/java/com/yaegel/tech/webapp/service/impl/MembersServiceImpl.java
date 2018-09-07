@@ -16,8 +16,8 @@ public class MembersServiceImpl implements MembersService{
 	private MembersRepository membersRepository;
 
 	@Override
-	public List<Members> getAllMembers() {
-		return membersRepository.getAllMembers();
+	public List<Members> getAllMembers(int start, int stop) {
+		return membersRepository.getAllMembers(start, stop);
 	}
 
 	@Override
@@ -35,6 +35,12 @@ public class MembersServiceImpl implements MembersService{
 	public void deleteMember(String memberID) {
 		membersRepository.deleteMember(memberID);
 		
+	}
+
+	@Override
+	public int getMemberCount() {
+		// TODO Auto-generated method stub
+		return membersRepository.getMemberCount();
 	}
 	
 	

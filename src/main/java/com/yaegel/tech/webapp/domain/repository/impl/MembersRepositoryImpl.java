@@ -19,9 +19,21 @@ public class MembersRepositoryImpl implements MembersRepository{
 	private NamedParameterJdbcTemplate jdbcTemplate;
 	
 	@Override
-	public List<Members> getAllMembers() {
+	public List<Members> getAllMembers(int start, int stop) {
+		String SQL = "SELECT * FROM customer LIMIT :start, :stop";
 		Map<String, Object> params = new HashMap<String, Object>();
-		List<Members> result = jdbcTemplate.query("SELECT * FROM customer", params, new MembersMapper());
+		params.put("start", start);
+		params.put("stop", stop);
+		List<Members> result = jdbcTemplate.query(SQL, params, new MembersMapper());
+		
+		return result;
+	}
+	
+	@Override
+	public int getMemberCount() {
+		String SQL = "SELECT COUNT(*) from customer";
+		Map<String, Object> params = new HashMap<String, Object>();
+		Integer result = jdbcTemplate.queryForObject(SQL, params, Integer.class);
 		
 		return result;
 	}
@@ -31,6 +43,7 @@ public class MembersRepositoryImpl implements MembersRepository{
 		String SQL = "SELECT * FROM customer WHERE CustomerID = :id";
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("id", memberID);
+		
 		return jdbcTemplate.queryForObject(SQL, params, new MembersMapper());
 	}
 	
@@ -53,8 +66,9 @@ public class MembersRepositoryImpl implements MembersRepository{
 				+ "CustomerCity,"
 				+ "CustomerState,"
 				+ "CustomerZip,"
-				+ "CustomerPhone)"
-				+ "VALUES (:id, :firstName, :lastName, :address1, :address2, :city, :state, :zip, :phone)";
+				+ "CustomerPhone,"
+				+ "CustomerImageUrl)"
+				+ "VALUES (:id, :firstName, :lastName, :address1, :address2, :city, :state, :zip, :phone, :url)";
 		Map<String, Object> params = new HashMap<>();
 		params.put("id", member.getCustomerId());
 		params.put("firstName", member.getCustomerFn());
@@ -65,6 +79,7 @@ public class MembersRepositoryImpl implements MembersRepository{
 		params.put("state", member.getCustomerState());
 		params.put("zip", member.getCustomerZip());
 		params.put("phone", member.getCustomerPhone());
+		params.put("url", member.getCustomerImageUrl());
 		
 		jdbcTemplate.update(SQL, params);
 		
@@ -83,11 +98,13 @@ public class MembersRepositoryImpl implements MembersRepository{
 			member.setCustomerState(rs.getString("CustomerState"));
 			member.setCustomerZip(rs.getString("CustomerZip"));
 			member.setCustomerPhone(rs.getString("CustomerPhone"));
+			member.setCustomerImageUrl(rs.getString("CustomerImageUrl"));
 			
 			return member;
 		}
 
 	}
+
 
 	
 	

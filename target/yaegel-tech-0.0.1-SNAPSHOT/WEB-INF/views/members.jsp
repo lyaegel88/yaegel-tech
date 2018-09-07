@@ -41,7 +41,7 @@
         <a class="nav-link" href="${pageContext.request.contextPath}/contact">Contact Me</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="${pageContext.request.contextPath}/members">Members</a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/members?page=1">Members</a>
       </li>
     </ul>
   </div>  
@@ -62,7 +62,7 @@
 						<h3 class="card-header">Manage Members</h3>
 						<div class="card-body">
 						<p><a href="${pageContext.request.contextPath}/members/add"><button type="button" class="btn btn-primary">Add a member</button></a><p>
-						<p><a href="${pageContext.request.contextPath}/members/manage"><button type="button" class="btn btn-primary">Delete a member</button></a></p>	
+						<p><a href="${pageContext.request.contextPath}/members/manage?page=1"><button type="button" class="btn btn-primary">Delete a member</button></a></p>	
 						</div>
 					
 				</div>
@@ -76,11 +76,31 @@
 						<p>Member ID: ${members.customerId}</p>
 						<p>Address: ${members.customerAddress1}</p>
 						<p>${members.customerCity}, ${members.customerState} ${members.customerZip}</p>
-						<p><a href=" <spring:url value="/member?id=${members.customerId}" />"><button type="button" class="btn btn-info">Details</button></a></p>
+						<p><a href=" <spring:url value="/member?id=${members.customerId}&page=${pagenumber}" />"><button type="button" class="btn btn-info">Details</button></a></p>
 						</div>
 				</div>
 			</div>
 		</c:forEach>
+	</div>
+	<br>
+	<div class="container">
+		<div class="row">
+			<ul class="pagination">
+				 <c:if test="${pagenumber > 1}">
+				  <li class="page-item"><a class="page-link" href="<spring:url value="/members?page=${pagenumber - 1}" />">Previous</a></li>
+				</c:if>
+				 	<li class="page-item"><a class="page-link" href="<spring:url value="/members?page=${pagenumber}" />">${pagenumber}</a></li>
+					<c:if test="${pagenumber + 1 <= maxpages}">
+				 	<li class="page-item"><a class="page-link" href="<spring:url value="/members?page=${pagenumber + 1}" />">${pagenumber + 1}</a></li>
+					</c:if>
+					<c:if test="${pagenumber + 2 <= maxpages}">
+				 	<li class="page-item"><a class="page-link" href="<spring:url value="/members?page=${pagenumber + 2}" />">${pagenumber + 2}</a></li>
+					</c:if>
+				<c:if test="${pagenumber + 1 <= maxpages}">
+				  <li class="page-item"><a class="page-link" href="<spring:url value="/members?page=${pagenumber + 1}" />">Next</a></li>
+				</c:if>
+				</ul>
+		</div>
 	</div>
 </section>
 

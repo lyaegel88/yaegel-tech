@@ -5,7 +5,9 @@ import com.yaegel.tech.webapp.domain.Members;
 
 public interface MembersService {
 
-	List<Members> getAllMembers();
+	List<Members> getAllMembers(int start, int stop);
+	
+	int getMemberCount();
 	
 	Members getMemberById(String memberID);
 	

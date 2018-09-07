@@ -41,7 +41,7 @@
         <a class="nav-link" href="${pageContext.request.contextPath}/contact">Contact Me</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="${pageContext.request.contextPath}/members">Members</a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/members?page=1">Members</a>
       </li>
     </ul>
   </div>  
@@ -56,20 +56,26 @@
 </section>
 
 <section class="container">
-	<div class="row">
+	<div class="row justify-content-center">
 		
-		<div class="col-md-5">
-			<div class="card">
-					
-						<h3 class="card-header">${member.customerFn} ${member.customerLn}</h3>
+		<div class="col-sm-4 col-md-4 col-lg-4">
+			<div class="card" >
+				<img class="card-img-top " src= ${ member.customerImageUrl} alt="image" >
+						<h3 class="card-header" style="text-align: center">${member.customerFn} ${member.customerLn}</h3>
 						<div class="card-body">
 						<p>Member ID: ${member.customerId}</p>
 						<p>Address: ${member.customerAddress1}</p>
 						<p>${member.customerCity}, ${member.customerState} ${member.customerZip}</p>
-						<p><a href="<spring:url value="/members" />"> <button type="button" class="btn btn-dark">Back</button></a></p>
+						<p><a href="<spring:url value="/members?page=${pagenumber}" />"> <button type="button" class="btn btn-dark">Back</button></a></p>
 						</div>
 				</div>
 		</div>
+	</div>
+</section>
+
+<section>
+	<div class="container">
+		<div class="row">${uploadResult}</div>
 	</div>
 </section>
 
