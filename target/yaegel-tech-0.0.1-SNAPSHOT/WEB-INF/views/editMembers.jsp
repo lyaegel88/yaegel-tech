@@ -1,6 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.util.Calendar"%>
+<% pageContext.setAttribute("currentYear", java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)); %>
 <!DOCTYPE html>
 <html lang="en">
      <head>
@@ -57,7 +60,7 @@
 <section class="container">
 <p>${deleted}</p>
 	<div class="row">
-	<div class="col-sm-6 col-md-3" style="margin-top:10px">
+	<div class="col-sm-6 col-md-4 col-lg-3">
 				<div class="card">
 					
 						<h3 class="card-header">Manage Members</h3>
@@ -69,11 +72,11 @@
 				</div>
 			</div>
 		<c:forEach items="${members}" var="members">
-			<div class="col-sm-6 col-md-3" style="margin-top:10px">
-				<div class="card">
-					
-						<h3 class="card-header">${members.customerFn} ${members.customerLn}</h3>
-						<div class="card-body">
+			<div class="col-sm-6 col-md-4 col-lg-3 align-self-end">
+				<div class="card" style="margin-bottom: 10px; border: none; padding-top: 10px">
+						<img  src=${members.customerImageUrl } alt="Member Picture" height=100% width=100% style="object-fit: cover">
+						<h3 class="card-header" style="text-align: center; border: 1px solid silver">${members.customerFn} ${members.customerLn}</h3>
+						<div class="card-body" style="border: 1px solid silver; border-top: none">
 						<p>Member ID: ${members.customerId}</p>
 						<p>Address: ${members.customerAddress1}</p>
 						<p>${members.customerCity}, ${members.customerState} ${members.customerZip}</p>
@@ -105,6 +108,10 @@
 		</div>
 		</div>
 </section>
-
+<section>
+<div class="jumbotron jumbotron-fluid text-center" style="margin-bottom: 0px">
+	<p>Copyright &copy; <c:out value="${currentYear}" /> Luke Yaegel</p>
+</div>
+</section>
 </body>
 </html>

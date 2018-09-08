@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.yaegel.tech.webapp.domain.Members;
+import com.yaegel.tech.webapp.exception.SpringException;
 import com.yaegel.tech.webapp.service.MembersService;
 
 import com.cloudinary.*;
@@ -28,9 +30,6 @@ import com.cloudinary.utils.ObjectUtils;
 
 @Controller
 public class MembersController {
-	
-	@Autowired
-	private Cloudinary cloudinaryBean;
 	
 	@Autowired
 	private MembersService membersService;
@@ -100,6 +99,17 @@ public class MembersController {
 	public RedirectView processAddNewMembersForm(@ModelAttribute ("newMember") Members newMember, RedirectAttributes redirectAttributes) throws IOException {
 		
 		MultipartFile customerImage = newMember.getCustomerImage();
+		/*
+		Members exists = new Members();
+		
+		exists = membersService.getMemberById(newMember.getCustomerId());
+		
+		int newMemberId = Integer.parseInt(newMember.getCustomerId());
+		int existsMemberId = Integer.parseInt(exists.getCustomerId());
+		
+		if(newMemberId == existsMemberId) {
+			throw new SpringException("The Member ID entered ALREADY EXISTS.");
+		}*/
 		
 		if (customerImage !=null && !customerImage.isEmpty()) {
 			
@@ -108,8 +118,14 @@ public class MembersController {
 				
 				customerImage.transferTo(convFile);
 				
+
+				Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
+						  "cloud_name", "hitfox6pi",
+						  "api_key", "939334414551673",
+						  "api_secret", "BTyM6j7y3SFNCnMvZDj8obSzP10"));
+				
 				@SuppressWarnings("rawtypes")
-				Map uploadResult = cloudinaryBean.uploader().upload(convFile, ObjectUtils.asMap("public_id", newMember.getCustomerId(), "format", "png"));
+				Map uploadResult = cloudinary.uploader().upload(convFile, ObjectUtils.asMap("public_id", newMember.getCustomerId(), "format", "png"));
 				
 				String url = (String)uploadResult.get("secure_url");
 				
@@ -119,13 +135,23 @@ public class MembersController {
 				throw new RuntimeException("Member Image Failed to Save", e);
 			}
 			
-		}	
+		}else {
+			throw new SpringException("No image has been selected. Please add an image when creating a member.");
+		}
 		
 		membersService.addMember(newMember);
 		
 		redirectAttributes.addFlashAttribute("success", "<div class=\"alert alert-success\">User was successfully ADDED</div>");
 		
 		return new RedirectView("add");
+	}
+	
+	@ExceptionHandler({SpringException.class})
+	public String handleError(Model model, SpringException ex) {
+		
+		model.addAttribute("exception", ex.getExceptionMsg());
+		
+		return "ExceptionPage";
 	}
 	
 	@RequestMapping ("/member/delete")
@@ -141,8 +167,14 @@ public class MembersController {
 		            BufferedImage image = ImageIO.read(new URL(mem.getCustomerImageUrl()));  
 		            //BufferedImage image = ImageIO.read(new URL("http://someimage.jpg"));  
 		            if(image != null){
+		            	
+
+		            	Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
+		            			  "cloud_name", "hitfox6pi",
+		            			  "api_key", "939334414551673",
+		            			  "api_secret", "BTyM6j7y3SFNCnMvZDj8obSzP10"));
 	
-		            	cloudinaryBean.uploader().destroy(memberId, ObjectUtils.emptyMap());
+		            	cloudinary.uploader().destroy(memberId, ObjectUtils.emptyMap());
 		            }
 	
 		        } catch (MalformedURLException e) {    

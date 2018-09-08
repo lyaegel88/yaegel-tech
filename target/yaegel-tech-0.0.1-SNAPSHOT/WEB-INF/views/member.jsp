@@ -1,6 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.util.Calendar"%>
+<% pageContext.setAttribute("currentYear", java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)); %>
 <!DOCTYPE html>
 <html lang="en">
      <head>
@@ -59,10 +62,10 @@
 	<div class="row justify-content-center">
 		
 		<div class="col-sm-4 col-md-4 col-lg-4">
-			<div class="card" >
+			<div class="card" style="border: none; padding-bottom: 15px;">
 				<img class="card-img-top " src= ${ member.customerImageUrl} alt="image" >
-						<h3 class="card-header" style="text-align: center">${member.customerFn} ${member.customerLn}</h3>
-						<div class="card-body">
+						<h3 class="card-header" style="text-align: center; border: 1px solid silver">${member.customerFn} ${member.customerLn}</h3>
+						<div class="card-body" style="border: 1px solid silver; border-top: none">
 						<p>Member ID: ${member.customerId}</p>
 						<p>Address: ${member.customerAddress1}</p>
 						<p>${member.customerCity}, ${member.customerState} ${member.customerZip}</p>
@@ -77,6 +80,13 @@
 	<div class="container">
 		<div class="row">${uploadResult}</div>
 	</div>
+</section>
+
+
+<section>
+<div class="jumbotron jumbotron-fluid text-center" style="margin-bottom: 0px">
+	<p>Copyright &copy; <c:out value="${currentYear}" /> Luke Yaegel</p>
+</div>
 </section>
 
 </body>

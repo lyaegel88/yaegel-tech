@@ -2,6 +2,9 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.util.Calendar"%>
+<% pageContext.setAttribute("currentYear", java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)); %>
 <!DOCTYPE html>
 <html lang="en">
      <head>
@@ -128,6 +131,11 @@
 			</div>
 		</fieldset>
 	</form:form>
+</section>
+<section>
+<div class="jumbotron jumbotron-fluid text-center" style="margin-bottom: 0px">
+	<p>Copyright &copy; <c:out value="${currentYear}" /> Luke Yaegel</p>
+</div>
 </section>
 
 </body>

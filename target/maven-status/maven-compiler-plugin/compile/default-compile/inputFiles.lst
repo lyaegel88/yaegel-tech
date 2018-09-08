@@ -10,5 +10,6 @@
 /mnt/c/Users/Bill Idol/Documents/workspace-sts-3.9.1.RELEASE/yaegel-tech/src/main/java/com/yaegel/tech/webapp/controller/ProjectsController.java
 /mnt/c/Users/Bill Idol/Documents/workspace-sts-3.9.1.RELEASE/yaegel-tech/src/main/java/com/yaegel/tech/webapp/service/impl/MembersServiceImpl.java
 /mnt/c/Users/Bill Idol/Documents/workspace-sts-3.9.1.RELEASE/yaegel-tech/src/main/java/com/yaegel/tech/webapp/domain/repository/MembersRepository.java
+/mnt/c/Users/Bill Idol/Documents/workspace-sts-3.9.1.RELEASE/yaegel-tech/src/main/java/com/yaegel/tech/webapp/exception/SpringException.java
 /mnt/c/Users/Bill Idol/Documents/workspace-sts-3.9.1.RELEASE/yaegel-tech/src/main/java/com/yaegel/tech/webapp/controller/MembersController.java
 /mnt/c/Users/Bill Idol/Documents/workspace-sts-3.9.1.RELEASE/yaegel-tech/src/main/java/com/yaegel/tech/webapp/controller/HomeController.java
