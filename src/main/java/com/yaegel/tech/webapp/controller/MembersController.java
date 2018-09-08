@@ -36,40 +36,41 @@ public class MembersController {
 
 	@RequestMapping ("/members")
 	public String list(@RequestParam("page") int page, Model model) {
-
+		
+		//Page Number from URL e.g. page=1
 		int pagenumber = page;
 		model.addAttribute("pagenumber", pagenumber);
 		
-		int start = 0;
-		int stop = 7;
+		//Row count for following calculations
 		int maxrows = membersService.getMemberCount();
 		
+		//Find the Max number of pages and see if an extra page is needed
 		if (maxrows >= 7){
 			int maxpages = maxrows / 7;
 			int pageTest = maxpages * 7; 
 			int addPage = maxrows - pageTest;
 			int zero = 0;
-			
+		//Add an extra page if TRUE
 			if (addPage > zero){
 				int extraPage = maxpages + 1;
 				model.addAttribute("maxpages", extraPage);
-				
+		//Do not add an extra page if FALSE		
 			}else {
 				model.addAttribute("maxpages", maxpages);
 			}
+		//Only one page is needed because at least 7 rows are not available 
 		}else{
 			model.addAttribute("maxpages", 1);
 		 }
-		
+		//pull the first 7 on page 1
 		if (pagenumber <= 1) {
 
-			model.addAttribute("members", membersService.getAllMembers(start, stop));
+			model.addAttribute("members", membersService.getAllMembers(0, 7));
 		}else{
-			int stopSQL = 7;
-			int pageNumber = pagenumber - 1;
-			int startSQL = 7 * pageNumber; //may need to minus 1 if extra is returned 
-			model.addAttribute("stop", stopSQL);
-			model.addAttribute("start", startSQL);
+			int stopSQL = 7; //Offset
+			int pageNumber = pagenumber - 1; 
+			int startSQL = 7 * pageNumber; //What row should the query start at, e.g. 7 * 2 = 14 (start at row 14 and pull the next 7 rows)
+
 			model.addAttribute("members", membersService.getAllMembers(startSQL, stopSQL));
 			
 		}
@@ -99,17 +100,6 @@ public class MembersController {
 	public RedirectView processAddNewMembersForm(@ModelAttribute ("newMember") Members newMember, RedirectAttributes redirectAttributes) throws IOException {
 		
 		MultipartFile customerImage = newMember.getCustomerImage();
-		/*
-		Members exists = new Members();
-		
-		exists = membersService.getMemberById(newMember.getCustomerId());
-		
-		int newMemberId = Integer.parseInt(newMember.getCustomerId());
-		int existsMemberId = Integer.parseInt(exists.getCustomerId());
-		
-		if(newMemberId == existsMemberId) {
-			throw new SpringException("The Member ID entered ALREADY EXISTS.");
-		}*/
 		
 		if (customerImage !=null && !customerImage.isEmpty()) {
 			
@@ -140,6 +130,9 @@ public class MembersController {
 		}
 		
 		membersService.addMember(newMember);
+		
+		//Sending Logs to Papertrail Heroku Plugin
+		System.out.println("New Member with Customer ID: " + newMember.getCustomerId() + " and Image URL: " + newMember.getCustomerImageUrl());
 		
 		redirectAttributes.addFlashAttribute("success", "<div class=\"alert alert-success\">User was successfully ADDED</div>");
 		
@@ -190,6 +183,9 @@ public class MembersController {
 		}
 		
 		membersService.deleteMember(memberId);
+		
+		//Sending Logs to Papertrail Heroku Plugin
+		System.out.println("The following Member was Deleted: " + memberId);
 		
 		ra.addFlashAttribute("deleted", "<div class=\"alert alert-success\">User was successfully DELETED</div>");
 		
