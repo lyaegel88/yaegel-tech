@@ -46,6 +46,9 @@
       <li class="nav-item">
         <a class="nav-link" href="${pageContext.request.contextPath}/members?page=1">Members</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<c:url value="/logout" />">Logout</a>
+      </li>
     </ul>
   </div>  
 </nav>
@@ -89,24 +92,31 @@
 	</div>
 	<br>
 	<div class="container">
-		<div class="row">
 			<ul class="pagination">
 				 <c:if test="${pagenumber > 1}">
-				  <li class="page-item"><a class="page-link" href="<spring:url value="/members/manage?page=${pagenumber - 1}" />">Previous</a></li>
+				  <li class="page-item"><a class="page-link" href="<spring:url value="/members?page=${pagenumber - 1}" />">Previous</a></li>
 				</c:if>
-				 	<li class="page-item"><a class="page-link" href="<spring:url value="/members/manage?page=${pagenumber}" />">${pagenumber}</a></li>
+				 	<li class="page-item active"><a class="page-link" href="<spring:url value="/members?page=${pagenumber}" />">${pagenumber}</a></li>
 					<c:if test="${pagenumber + 1 <= maxpages}">
-				 	<li class="page-item"><a class="page-link" href="<spring:url value="/members/manage?page=${pagenumber + 1}" />">${pagenumber + 1}</a></li>
+				 	<li class="page-item"><a class="page-link" href="<spring:url value="/members?page=${pagenumber + 1}" />">${pagenumber + 1}</a></li>
 					</c:if>
 					<c:if test="${pagenumber + 2 <= maxpages}">
-				 	<li class="page-item"><a class="page-link" href="<spring:url value="/members/manage?page=${pagenumber + 2}" />">${pagenumber + 2}</a></li>
+				 	<li class="page-item"><a class="page-link" href="<spring:url value="/members?page=${pagenumber + 2}" />">${pagenumber + 2}</a></li>
 					</c:if>
 				<c:if test="${pagenumber + 1 <= maxpages}">
-				  <li class="page-item"><a class="page-link" href="<spring:url value="/members/manage?page=${pagenumber + 1}" />">Next</a></li>
+				  <li class="page-item"><a class="page-link" href="<spring:url value="/members?page=${pagenumber + 1}" />">Next</a></li>
 				</c:if>
 				</ul>
-		</div>
-		</div>
+				
+				<ul class="pagination">
+  					  <c:if test="${pagenumber <= maxpages && pagenumber !=1}">
+				  <li class="page-item"><a class="page-link" href="<spring:url value="/members?page=1" />">First</a></li>
+				</c:if>
+				<c:if test="${pagenumber < maxpages && maxpages != 1}">
+				  <li class="page-item"><a class="page-link" href="<spring:url value="/members?page=${maxpages}" />">Last</a></li>
+				</c:if>
+				</ul>
+	</div>
 </section>
 <section>
 <div class="jumbotron jumbotron-fluid text-center" style="margin-bottom: 0px">

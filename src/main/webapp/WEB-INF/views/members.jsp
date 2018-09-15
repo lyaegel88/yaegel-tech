@@ -47,6 +47,9 @@
       <li class="nav-item">
         <a class="nav-link" href="${pageContext.request.contextPath}/members?page=1">Members</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<c:url value="/logout" />">Logout</a>
+      </li>
     </ul>
   </div>  
 </nav>

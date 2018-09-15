@@ -48,6 +48,10 @@
       <li class="nav-item">
         <a class="nav-link" href="${pageContext.request.contextPath}/members?page=1">Members</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<c:url value="/logout" />">Logout</a>
+      </li>
+      
     </ul>
   </div>  
 </nav>
@@ -114,6 +118,20 @@
 					<label for="customerPhone">Phone</label>
 					
 						<form:input id="customerPhone" path="customerPhone" type="text" class="form-control"/>
+					
+				</div>
+				
+				<div class="form-group">
+					<label for="customerPassword">Password</label>
+					
+						<form:input id="customerPassword" path="customerPassword" type="password" class="form-control"/>
+					
+				</div>
+				
+				<div class="form-group">
+					<label for="customerRole">Role</label>
+					
+						<form:input id="customerRole" path="customerRole" type="text" class="form-control"/>
 					
 				</div>
 				

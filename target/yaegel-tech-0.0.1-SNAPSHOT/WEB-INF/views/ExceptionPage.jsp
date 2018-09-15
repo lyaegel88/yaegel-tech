@@ -5,9 +5,9 @@
    </head>
    <body>
 
-      <h2>An Error has Occurred!</h2>
+      <h2>ERROR!</h2>
 
-      <h3>${exception}</h3>
+      <h3>Message: ${exception}</h3>
 
    </body>
 </html>

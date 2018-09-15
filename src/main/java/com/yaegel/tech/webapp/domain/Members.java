@@ -17,6 +17,8 @@ public class Members implements Serializable {
 	private String customerZip;
 	private String customerPhone;
 	private String customerImageUrl;
+	private String customerPassword;
+	private String customerRole;
 	
 	private MultipartFile customerImage;
 	
@@ -117,6 +119,22 @@ public class Members implements Serializable {
 
 	public void setCustomerImage(MultipartFile customerImage) {
 		this.customerImage = customerImage;
+	}
+	
+	public String getCustomerRole() {
+		return customerRole;
+	}
+
+	public void setCustomerRole(String customerRole) {
+		this.customerRole = customerRole;
+	}
+
+	public String getCustomerPassword() {
+		return customerPassword;
+	}
+
+	public void setCustomerPassword(String customerPassword) {
+		this.customerPassword = customerPassword;
 	}
 
 	@Override

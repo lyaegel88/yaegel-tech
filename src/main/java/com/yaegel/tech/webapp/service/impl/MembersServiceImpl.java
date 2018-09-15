@@ -43,5 +43,11 @@ public class MembersServiceImpl implements MembersService{
 		return membersRepository.getMemberCount();
 	}
 	
+	public List<Members> getMemberExists(String memberID) {
+		return membersRepository.getMemberExists(memberID);
+	}
 	
+	public List<Members> getEveryMember(){
+		return membersRepository.getEveryMember();
+	}
 }

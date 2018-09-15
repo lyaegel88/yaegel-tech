@@ -14,5 +14,9 @@ public interface MembersRepository {
 	void deleteMember(String memberID);
 
 	int getMemberCount();
+	
+	List <Members> getMemberExists(String memberID);
+	
+	List <Members> getEveryMember();
 
 }

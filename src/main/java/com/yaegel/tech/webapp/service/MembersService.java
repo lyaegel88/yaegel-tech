@@ -15,4 +15,8 @@ public interface MembersService {
 	
 	void deleteMember(String memberID);
 	
+	List <Members> getMemberExists(String memberID);
+	
+	List <Members> getEveryMember();
+	
 }

@@ -69,8 +69,10 @@ public class MembersRepositoryImpl implements MembersRepository{
 				+ "CustomerState,"
 				+ "CustomerZip,"
 				+ "CustomerPhone,"
-				+ "CustomerImageUrl)"
-				+ "VALUES (:id, :firstName, :lastName, :address1, :address2, :city, :state, :zip, :phone, :url)";
+				+ "CustomerImageUrl,"
+				+ "CustomerPassword,"
+				+ "CustomerRole)"
+				+ "VALUES (:id, :firstName, :lastName, :address1, :address2, :city, :state, :zip, :phone, :url, :password, :role)";
 		Map<String, Object> params = new HashMap<>();
 		params.put("id", member.getCustomerId());
 		params.put("firstName", member.getCustomerFn());
@@ -82,6 +84,8 @@ public class MembersRepositoryImpl implements MembersRepository{
 		params.put("zip", member.getCustomerZip());
 		params.put("phone", member.getCustomerPhone());
 		params.put("url", member.getCustomerImageUrl());
+		params.put("password", member.getCustomerPassword());
+		params.put("role", member.getCustomerRole());
 		
 		try {
 			jdbcTemplate.update(SQL, params);
@@ -111,6 +115,24 @@ public class MembersRepositoryImpl implements MembersRepository{
 			return member;
 		}
 
+	}
+
+	@Override
+	public List<Members> getMemberExists(String memberID) {
+		String SQL = "SELECT * FROM customer WHERE CustomerID = :id";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id", memberID);
+		List<Members> result = jdbcTemplate.query(SQL, params, new MembersMapper());
+		
+		return result;
+	}
+
+	@Override
+	public List<Members> getEveryMember() {
+		String SQL = "SELECT * FROM customer";
+		List<Members> result = jdbcTemplate.query(SQL, new MembersMapper());
+		
+		return result;
 	}
 
 

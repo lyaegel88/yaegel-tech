@@ -5,11 +5,13 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -22,14 +24,20 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.yaegel.tech.webapp.domain.Members;
+import com.yaegel.tech.webapp.exception.NoMemberFoundException;
 import com.yaegel.tech.webapp.exception.SpringException;
 import com.yaegel.tech.webapp.service.MembersService;
 
 import com.cloudinary.*;
 import com.cloudinary.utils.ObjectUtils;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 @Controller
 public class MembersController {
+	
+	@Autowired
+	private Cloudinary cloudinary;
 	
 	@Autowired
 	private MembersService membersService;
@@ -81,6 +89,12 @@ public class MembersController {
 	
 	@RequestMapping ("/member")
 	public String getMemberById(@RequestParam("id") String memberId, @RequestParam("page") String page, Model model) throws IOException {
+		List<Members> exist = membersService.getMemberExists(memberId);
+		
+		if(exist== null || exist.isEmpty()) {
+			throw new NoMemberFoundException();
+		}
+		
 		model.addAttribute("member", membersService.getMemberById(memberId));
 		model.addAttribute("pagenumber", page);
 		
@@ -99,40 +113,55 @@ public class MembersController {
 	@RequestMapping (value = "/members/add", method = RequestMethod.POST)
 	public RedirectView processAddNewMembersForm(@ModelAttribute ("newMember") Members newMember, RedirectAttributes redirectAttributes) throws IOException {
 		
-		MultipartFile customerImage = newMember.getCustomerImage();
+	
+		List<Members> exist = membersService.getMemberExists(newMember.getCustomerId());
 		
-		if (customerImage !=null && !customerImage.isEmpty()) {
+		if(exist == null || exist.isEmpty()) {
+		
+			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+			String hashedPassword = passwordEncoder.encode(newMember.getCustomerPassword());
 			
-			try {
-				File convFile = new File(newMember.getCustomerId() + ".png");
+			newMember.setCustomerPassword(hashedPassword);
+			
+			MultipartFile customerImage = newMember.getCustomerImage();
+			
+			if (customerImage !=null && !customerImage.isEmpty()) {
 				
-				customerImage.transferTo(convFile);
+				try {
+					File convFile = new File(newMember.getCustomerId() + ".png");
+					
+					customerImage.transferTo(convFile);
+					
+	
+					/*
+					Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
+							  "cloud_name", "hitfox6pi",
+							  "api_key", "939334414551673",
+							  "api_secret", "BTyM6j7y3SFNCnMvZDj8obSzP10"));*/
+					
+					@SuppressWarnings("rawtypes")
+					Map uploadResult = cloudinary.uploader().upload(convFile, ObjectUtils.asMap("public_id", newMember.getCustomerId(), "format", "png"));
+					
+					String url = (String)uploadResult.get("secure_url");
+					
+					newMember.setCustomerImageUrl(url);
+					
+				} catch (Exception e) {
+					throw new RuntimeException("Member Image Failed to Save", e);
+				}
 				
-
-				Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
-						  "cloud_name", "hitfox6pi",
-						  "api_key", "939334414551673",
-						  "api_secret", "BTyM6j7y3SFNCnMvZDj8obSzP10"));
-				
-				@SuppressWarnings("rawtypes")
-				Map uploadResult = cloudinary.uploader().upload(convFile, ObjectUtils.asMap("public_id", newMember.getCustomerId(), "format", "png"));
-				
-				String url = (String)uploadResult.get("secure_url");
-				
-				newMember.setCustomerImageUrl(url);
-				
-			} catch (Exception e) {
-				throw new RuntimeException("Member Image Failed to Save", e);
+			}else {
+				throw new SpringException("No image has been selected. Please add an image when creating a member.");
 			}
 			
+			membersService.addMember(newMember); 
+			
 		}else {
-			throw new SpringException("No image has been selected. Please add an image when creating a member.");
+			throw new SpringException("Member Already Exists!");
 		}
 		
-		membersService.addMember(newMember);
-		
 		//Sending Logs to Papertrail Heroku Plugin
-		System.out.println("New Member with Customer ID: " + newMember.getCustomerId() + " and Image URL: " + newMember.getCustomerImageUrl());
+		System.out.println("New Member Added with Customer ID: " + newMember.getCustomerId() + " and Image URL: " + newMember.getCustomerImageUrl());
 		
 		redirectAttributes.addFlashAttribute("success", "<div class=\"alert alert-success\">User was successfully ADDED</div>");
 		
@@ -194,8 +223,30 @@ public class MembersController {
 	
 	@RequestMapping ("/members/manage")
 	public String manageList (@RequestParam("page") int page, Model model) {
-
-		int pagenumber = page;
+		
+		Integer newPage = page;
+		
+		List<Members> members = membersService.getEveryMember();
+		
+		PagedListHolder<Members> pagedListHolder = new PagedListHolder<>(members);
+		
+		pagedListHolder.setPageSize(7);
+		
+		model.addAttribute("maxPages", pagedListHolder.getPageCount());
+		
+		if(newPage==null || newPage < 1 || newPage > pagedListHolder.getPageCount())newPage=1;
+		
+		model.addAttribute("page", newPage);
+		
+		if(newPage == null || newPage < 1 || newPage > pagedListHolder.getPageCount()){
+            pagedListHolder.setPage(0);
+            model.addAttribute("members", pagedListHolder.getPageList());
+		
+		}else if(newPage <= pagedListHolder.getPageCount()) {
+            pagedListHolder.setPage(newPage-1);
+            model.addAttribute("members", pagedListHolder.getPageList());
+        }
+		/*int pagenumber = page;
 		model.addAttribute("pagenumber", pagenumber);
 		
 		int start = 0;
@@ -231,9 +282,9 @@ public class MembersController {
 			model.addAttribute("start", startSQL);
 			model.addAttribute("members", membersService.getAllMembers(startSQL, stopSQL));
 			
-		}
+		}*/
 		
-		return "editMembers";
+		return "editMembers2";
 	}
 	
 }
