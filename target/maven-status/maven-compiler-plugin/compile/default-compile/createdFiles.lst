@@ -13,6 +13,7 @@ com/yaegel/tech/webapp/controller/AboutController.class
 com/yaegel/tech/webapp/controller/ContactController.class
 com/yaegel/tech/webapp/domain/Members.class
 com/yaegel/tech/webapp/exception/SpringException.class
+com/yaegel/tech/webapp/filter/HttpsEnforcer.class
 com/yaegel/tech/webapp/controller/ProjectsController.class
 com/yaegel/tech/webapp/service/MembersService.class
 com/yaegel/tech/webapp/exception/NoMemberFoundException.class

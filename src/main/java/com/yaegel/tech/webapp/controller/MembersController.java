@@ -88,7 +88,7 @@ public class MembersController {
 	}
 	
 	@RequestMapping ("/member")
-	public String getMemberById(@RequestParam("id") String memberId, @RequestParam("page") String page, Model model) throws IOException {
+	public String getMemberById(@RequestParam("id") String memberId, @RequestParam(value="page", required=false) String page, Model model) throws IOException {
 		List<Members> exist = membersService.getMemberExists(memberId);
 		
 		if(exist== null || exist.isEmpty()) {
