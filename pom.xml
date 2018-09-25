@@ -26,6 +26,28 @@
 			<configuration>
 			</configuration>
 			</plugin>
+			<plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <version>2.3</version>
+            <executions>
+                <execution>
+                    <phase>install</phase>
+                    <goals><goal>copy-dependencies</goal></goals>
+                    <configuration>
+                        <artifactItems>
+                            <artifactItem>
+                                <groupId>com.github.jsimone</groupId>
+                                <artifactId>webapp-runner</artifactId>
+                                <version>9.0.11.0</version>
+                                <destFileName>webapp-runner-9.0.11.0.jar</destFileName>
+                            </artifactItem>
+                        </artifactItems>
+                        <outputDirectory>${project.build.directory}/dependency</outputDirectory>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
  		</plugins>
 	</build>
 	<profiles>
@@ -60,8 +82,8 @@
             <version>2.3</version>
             <executions>
                 <execution>
-                    <phase>package</phase>
-                    <goals><goal>copy</goal></goals>
+                    <phase>install</phase>
+                    <goals><goal>copy-dependencies</goal></goals>
                     <configuration>
                         <artifactItems>
                             <artifactItem>
@@ -71,6 +93,7 @@
                                 <destFileName>webapp-runner-9.0.11.0.jar</destFileName>
                             </artifactItem>
                         </artifactItems>
+                        <outputDirectory>${project.build.directory}</outputDirectory>
                     </configuration>
                 </execution>
             </executions>
