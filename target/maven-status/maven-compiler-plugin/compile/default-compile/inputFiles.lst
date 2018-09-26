@@ -18,3 +18,4 @@
 /mnt/c/Users/Bill Idol/Documents/workspace-sts-3.9.1.RELEASE/yaegel-tech/src/main/java/com/yaegel/tech/webapp/controller/MembersController.java
 /mnt/c/Users/Bill Idol/Documents/workspace-sts-3.9.1.RELEASE/yaegel-tech/src/main/java/com/yaegel/tech/webapp/controller/HomeController.java
 /mnt/c/Users/Bill Idol/Documents/workspace-sts-3.9.1.RELEASE/yaegel-tech/src/main/java/com/yaegel/tech/webapp/controller/LoginController.java
+/mnt/c/Users/Bill Idol/Documents/workspace-sts-3.9.1.RELEASE/yaegel-tech/src/main/java/com/yaegel/tech/webapp/filter/HttpsEnforcer.java

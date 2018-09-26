@@ -1,9 +1,12 @@
 package com.yaegel.tech.webapp.config;
 
+import javax.servlet.Filter;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+
+import com.yaegel.tech.webapp.filter.HttpsEnforcer;
 
 
 public class DispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -33,8 +36,8 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
 		servletContext.setInitParameter("spring.profiles.active", System.getenv("PC_ENV"));
 	}
 	
-	/*@Override
+	@Override
 	protected Filter[] getServletFilters() {
 		return new Filter[]{new HttpsEnforcer()};
-	}*/
+	}
 }
